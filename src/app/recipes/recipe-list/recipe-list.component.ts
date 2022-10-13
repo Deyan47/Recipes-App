@@ -14,6 +14,12 @@ export class RecipeListComponent implements OnInit {
       imagePath:
         'https://i0.wp.com/www.cocoandash.com/wp-content/uploads/2016/05/One-Bowl-Brownies.jpg?w=1440&ssl=1',
     },
+    {
+      name: 'Name',
+      description: 'Description',
+      imagePath:
+        'https://i0.wp.com/www.cocoandash.com/wp-content/uploads/2016/05/One-Bowl-Brownies.jpg?w=1440&ssl=1',
+    },
   ];
 
   constructor() {}
