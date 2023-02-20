@@ -5,6 +5,7 @@ import { throwError, BehaviorSubject } from 'rxjs';
 
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 export interface AuthResponseData {
   kind: string;
@@ -21,12 +22,12 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   private tokenExpTimer: any;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   signup(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCpVN7Y3eFZuXutpY_-VZHk8FJmjWdoSyc',
+        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseAPIKey}`,
         {
           email: email,
           password: password,
@@ -49,7 +50,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCpVN7Y3eFZuXutpY_-VZHk8FJmjWdoSyc',
+        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseAPIKey}`,
         {
           email: email,
           password: password,
@@ -73,7 +74,7 @@ export class AuthService {
     const userData = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {
       return;
-    } 
+    }
 
     const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpiration));
 
@@ -93,7 +94,7 @@ export class AuthService {
   }
 
   autoLogout(expDuration: number) {
-  this.tokenExpTimer = setTimeout(() => {
+    this.tokenExpTimer = setTimeout(() => {
       this.logout();
     }, expDuration);
   }

@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
   private closeSub: Subscription;
 
-  constructor(private authService: AuthService, private router: Router, private viewContainerRef: ViewContainerRef ) { }
+  constructor(private authService: AuthService, private router: Router ) { }
 
   ngOnInit(): void {
   }
